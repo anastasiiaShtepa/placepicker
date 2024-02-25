@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Places from "./Places.jsx";
 import { sortPlacesByDistance } from "../utils/loc.js";
 import { fetchAvailablePlaces } from "../utils/http.js";
+import Error from "./Error.jsx";
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [isFetching, setIsFetching] = useState(false);
@@ -30,7 +31,7 @@ export default function AvailablePlaces({ onSelectPlace }) {
     fetchPlaces();
   }, []);
   if (error) {
-    return <div>Error</div>;
+    return <Error title="An error occurred" message={error.message} />;
   }
   return (
     <Places
